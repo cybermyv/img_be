@@ -1,13 +1,10 @@
 import * as Hapi from "hapi";
-// import * as Boom from "boom";
+import * as Boom from "boom";
 
 import { IServerConfigurations } from "./configurations";
 import { IPlugin } from "./plugins/interfaces";
 
-// import * as Temp from "./api/Temp";
-// import * as User from "./api/Users";
-// import * as Persona from "./api/Persona";
-
+import * as Img from "./api/Img";
 
 export const init = async (configs: IServerConfigurations): Promise<Hapi.Server> => {
     try {
@@ -48,9 +45,9 @@ export const init = async (configs: IServerConfigurations): Promise<Hapi.Server>
         console.log("All plugins registered successfully.");
 
         console.log("Register Routes");
-        // Temp.init(server, configs);
-        // User.init(server, configs);
-        // Persona.init(server, configs);
+
+      //- маршруты
+        Img.init(server, configs);
 
         return server;
 

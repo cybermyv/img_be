@@ -4,14 +4,11 @@ import * as Hapi from "hapi";
 import * as Inert from "inert";
 import * as Vision from "vision";
 
-// const Inert = require('inert');
-// const Vision = require('vision');
+
 
 const register = async (server: Hapi.Server): Promise<void> => {
   try {
     return server.register([
-      // require("inert"),
-      // require("vision"),
       Inert,
       Vision,
 
