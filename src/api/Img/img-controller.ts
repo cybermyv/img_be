@@ -19,7 +19,7 @@ export default class ImgController {
         if (conn) {
             try {
                 const result: Img[] = await conn.query ('select * from img');
-                console.log('rez' + result);
+
                 return h.response(result).code(200);
             } catch (e) {
                 throw new Boom(e);
@@ -28,6 +28,32 @@ export default class ImgController {
         } else {
             return Boom.badImplementation();
         }
+    }
+
+    public async createImage (request: Hapi.Request, h: Hapi.ResponseToolkit) {
+
+        // const newImg: IImg = <IImg>request.payload;
+
+        const {payload} = request;
+
+        console.log(payload);
+
+        return h.response(payload).code(200);
+
+        // const conn = await Store.createConnection();
+
+        // if (conn) {
+        //     try {
+
+
+
+
+        //     } catch (e) {
+        //         throw new Boom(e);
+        //     }
+        // }  else {
+        //     return Boom.badImplementation();
+        // }
     }
 
 }

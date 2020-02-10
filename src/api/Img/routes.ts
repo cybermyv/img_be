@@ -28,7 +28,6 @@ export default function (
             },
             plugins: {
                 "hapi-swagger": {
-                    order: 2,
                     responses: {
                         "200": {
                             description: "All images responses"
@@ -42,4 +41,33 @@ export default function (
         }
 
     });
+
+
+
+server.route({
+    method: 'POST',
+    path: '/api/v1/img',
+    options: {
+        handler: imgController.createImage,
+        auth: false,
+        tags: ["api", "img"],
+        description: 'Create new IMG into db',
+        validate: {
+            payload: ImgValidator.createImgModel
+        },
+        plugins: {
+            "hapi-swagger": {
+                responses: {
+                    "201": {
+                        description: "Create img"
+                    },
+                    "404": {
+                        description: "Img does not exists"
+                    }
+                }
+            }
+        }
+    }
+});
+
 }
