@@ -10,7 +10,7 @@ export default class Store {
 
     public static connectionOptions: ConnectionOptions = {
         type: 'sqlite',
-        database: path.join(__dirname, 'dbase/imgdb.db'),
+        database: './dbase/imgdb.db',
         entities: [ Img ],
         synchronize: true
     };

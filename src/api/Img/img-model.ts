@@ -8,6 +8,21 @@ export interface IImg {
 
 }
 
+export interface FileUploaderOption {
+    dest: string;
+    fileFilter?(fileName: string): boolean;
+}
+
+export interface FileDetails {
+    fieldname: string;
+    originalname: string;
+    filename: string;
+    mimetype: string;
+    destination: string;
+    path: string;
+    size: number;
+}
+
 @Entity('img')
 export default class Img implements IImg {
 

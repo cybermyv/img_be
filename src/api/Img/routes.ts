@@ -48,12 +48,17 @@ server.route({
     method: 'POST',
     path: '/api/v1/img',
     options: {
+        payload: {
+            output: 'stream',
+            allow: 'multipart/form-data'
+        },
         handler: imgController.createImage,
         auth: false,
         tags: ["api", "img"],
         description: 'Create new IMG into db',
+
         validate: {
-            payload: ImgValidator.createImgModel
+            // payload: ImgValidator.createImgModel
         },
         plugins: {
             "hapi-swagger": {
