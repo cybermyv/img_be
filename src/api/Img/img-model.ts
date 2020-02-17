@@ -23,7 +23,7 @@ export interface FileDetails {
     size: number;
 }
 
-@Entity('img')
+@Entity('images')
 export default class Img implements IImg {
 
     @PrimaryGeneratedColumn()

@@ -16,7 +16,8 @@ const _fileHandler = function (file: any, options: FileUploaderOption) {
     if (!file) {throw new Error('no file'); }
 
     const orignalname = file.hapi.filename;
-    const filename = uuid.v1();
+    // const filename = uuid.v1();
+    const filename = orignalname;
     const path = `${options.dest}${filename}`;
     const fileStream = fs.createWriteStream(path);
 
