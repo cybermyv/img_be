@@ -39,6 +39,21 @@ export default class ImgController {
     }
 
 
+    public async getImageById (request: Hapi.Request, h: Hapi.ResponseToolkit) {
+        const conn = await Store.createConnection();
+        const id = request.params.id;
+        if (conn) {
+            try {
+                const result: Img = await conn.query('select * from images where id =?', [id]);
+                return h.response(result).code(200);
+            } catch (e) {
+                throw new Boom(e);
+            }
+        } else {
+            return Boom.badImplementation();
+        }
+    }
+
 
     public async createImage(request: Hapi.Request, h: Hapi.ResponseToolkit) {
 
@@ -53,7 +68,8 @@ export default class ImgController {
         try {
 
             const data = request.payload;
-            const file = data['avatar'];
+            const file = data['importFile'];
+            const pparam = data['path'];
 
             // const fileDetails = await uploader(file, fileOptions);
 
@@ -65,9 +81,11 @@ export default class ImgController {
                     let newImg = new Img();
 
                     newImg.name = file.hapi.filename;
-                    newImg.path = 'path1';
-                    newImg.pictures = request.payload['avatar']._data;
+                    newImg.path = pparam;
+                    let bitmap = request.payload['importFile']._data;
+                    newImg.pictures = new Buffer(bitmap).toString('base64');
 
+                   // newImg.pictures = request.payload['avatar']._data;
                     const img = await conn.getRepository(Img).save(newImg);
                     return h.response(img).code(200);
 

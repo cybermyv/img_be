@@ -42,6 +42,35 @@ export default function (
 
     });
 
+    server.route({
+        method: 'GET',
+        path: '/api/v1/img/{id}',
+        options: {
+            handler: imgController.getImageById,
+            auth: false,
+            tags: ["api", "img"],
+            description: 'Get pictures by id',
+            validate: {
+                params: {
+                    id: Joi.string().required()
+                }
+            },
+            plugins: {
+                "hapi-swagger": {
+                    responses: {
+                        "200": {
+                            description: "Image has founded"
+                        },
+                        "404": {
+                            description: "Image can not be obtained"
+                        }
+                    }
+                }
+            }
+        }
+
+    });
+
 
 
 server.route({
@@ -74,5 +103,7 @@ server.route({
         }
     }
 });
+
+
 
 }
